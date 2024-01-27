@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: proxysql-configmap
+data:
+  proxysql.cnf:
+    "datadir=\"/var/lib/proxysql\"\r\n \r\nadmin_variables=\r\n{\r\n
+    \   admin_credentials=\"admin:admin;cluster:secret\"\r\n    mysql_ifaces=\"0.0.0.0:6032\"\r\n
+    \   refresh_interval=2000\r\n    cluster_username=\"cluster\"\r\n    cluster_password=\"secret\"
+    \ \r\n}\r\n \r\nmysql_variables=\r\n{\r\n    threads=4\r\n    max_connections=2048\r\n
+    \   default_query_delay=0\r\n    default_query_timeout=36000000\r\n    have_compress=true\r\n
+    \   poll_timeout=2000\r\n    interfaces=\"0.0.0.0:6033;/tmp/proxysql.sock\"\r\n
+    \   default_schema=\"information_schema\"\r\n    stacksize=1048576\r\n    server_version=\"8.0.23\"\r\n
+    \   connect_timeout_server=3000\r\n    monitor_username=\"monitor\"\r\n    monitor_password=\"monitor\"\r\n
+    \   monitor_history=600000\r\n    monitor_connect_interval=60000\r\n    monitor_ping_interval=10000\r\n
+    \   monitor_read_only_interval=1500\r\n    monitor_read_only_timeout=500\r\n    ping_interval_server_msec=120000\r\n
+    \   ping_timeout_server=500\r\n    commands_stats=true\r\n    sessions_sort=true\r\n
+    \   connect_retries_on_failure=10\r\n}\r\n \r\nmysql_users =\r\n(\r\n    { username
+    = \"repluser\", password = \"secretPassword\", default_hostgroup = 10, active = 1 }\r\n)\r\n
+    \r\nmysql_servers =\r\n(\r\n    { address=\"mariadb-sts-0.mariadbcluster.default.svc.cluster.local\",
+    port = 3306, hostgroup=10, max_connections=100 },\r\n    { address=\"mariadb-sts-1.mariadbcluster.default.svc.cluster.local\",
+    port = 3306, hostgroup=20, max_connections=100 },\r\n    { address=\"mariadb-sts-2.mariadbcluster.default.svc.cluster.local\",
+    port = 3306, hostgroup=20, max_connections=100 }\r\n)"
