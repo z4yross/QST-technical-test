@@ -1,9 +1,0 @@
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: proxysql-storageclass
-provisioner: microk8s.io/hostpath
-reclaimPolicy: Delete
-parameters:
-  pvDir: /mnt/d/WorkSpace/kubernetes/QST-technical/data/proxysql
-volumeBindingMode: WaitForFirstConsumer
